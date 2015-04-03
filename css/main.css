@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* normalize-scss 3.0.2+normalize.3.0.2 | MIT/GPLv2 License | bit.ly/normalize-scss */
 /**
  * Establish a vertical rhythm unit using $base-font-size, $base-line-height,
@@ -548,7 +549,110 @@ th {
   box-sizing: border-box;
 }
 
-.container {
+/*
+	# HTML Structure
+	body
+		.header-container
+			.banner
+				header.wrapper
+					nav.main
+						ul
+							li
+								a
+									span
+								ul 
+									li
+										a
+											span
+					from.search
+					nav.second
+						ul
+							li
+								a
+									span
+			.slideshow
+		.main-container
+			.main.wrapper
+				nav.sidebar
+					ul
+						li
+							a
+				article
+					h1
+					p
+				aside
+					div.widget
+		.prefooter-container
+			.prefooter.wrapper
+				p		
+		.footer-container
+			footer.wrapper
+				p		
+*/
+body {
+  background: #333;
+}
+
+/*
+	SLIDESHOW
+	basic layout of unslider slideshow
+*/
+.slideshow {
+  position: relative;
+  overflow: auto;
+}
+.slideshow ul {
+  padding: 0;
+  margin: 0;
+}
+.slideshow ul li {
+  list-style: none;
+  float: left;
+  width: 100%;
+  min-height: 400px;
+  background-repeat: none;
+  background-size: 100%;
+}
+
+/*
+	NAV RESET
+	After the inclusion of normalize.css, we need to re-reset margin and padding values of the nav ul & li 
+*/
+nav ul {
+  padding: 0;
+  margin: 0;
+}
+nav ul li {
+  list-style: none;
+}
+nav ul li > ul {
+  display: none;
+}
+nav ul li a {
+  text-decoration: none;
+  display: block;
+}
+
+/*
+	IFRAME
+	make every iframe, such embed youtube videos or google maps, fit the container
+*/
+.iframe {
+  display: block;
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
+}
+.iframe iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.wrapper {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -556,13 +660,13 @@ th {
   margin-left: auto;
   margin-right: auto;
 }
-.container:after {
+.wrapper:after {
   content: " ";
   display: block;
   clear: both;
 }
 @media (min-width: 992px) {
-  .container {
+  .wrapper {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -570,14 +674,14 @@ th {
     margin-left: auto;
     margin-right: auto;
   }
-  .container:after {
+  .wrapper:after {
     content: " ";
     display: block;
     clear: both;
   }
 }
 @media (min-width: 1200px) {
-  .container {
+  .wrapper {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -585,87 +689,280 @@ th {
     margin-left: auto;
     margin-right: auto;
   }
-  .container:after {
+  .wrapper:after {
     content: " ";
     display: block;
     clear: both;
   }
 }
 
-section {
-  background: blue;
-}
-
-.column {
-  background: red;
+.page .leftbar {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  width: 12.5%;
+  float: left;
+  padding-left: 0.625%;
+  padding-right: 0.625%;
+}
+.page .content {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 56.25%;
+  float: left;
+  padding-left: 0.625%;
+  padding-right: 0.625%;
+}
+.page .rightbar {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 31.25%;
+  float: left;
+  padding-left: 0.625%;
+  padding-right: 0.625%;
+}
+
+.main .container {
+  position: relative;
+}
+
+#contact {
+  position: absolute;
+  top: 0;
+  right: -120px;
+}
+#contact div {
+  width: 120px;
+  background: #ccc;
+}
+
+/*
+	BANNER 
+	Banner can have 3 states: 
+	- "normal“: above the page
+	- "over": absolute positionning, slideshow or page illustration is under the banner
+	- "fixed": as "over", but stay at the top of the page
+*/
+.banner {
   width: 100%;
+  height: 100px;
+  background: rgba(0, 0, 0, 0.5);
+}
+.banner.over {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+.banner.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.header-container header {
+  position: relative;
+}
+.header-container header nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.header-container header nav ul {
+  background: #000;
+  height: 36px;
+}
+.header-container header nav ul li {
+  float: left;
+  position: relative;
+}
+.header-container header nav ul li a, .header-container header nav ul li a:visited {
+  display: block;
+  color: #fff;
+  width: auto;
+  height: auto;
+  line-height: 20px;
+  padding: 10px;
+  text-align: center;
+}
+.header-container header nav ul li a:hover {
+  display: block;
+  color: #000;
+  background: #FFF;
+  line-height: 20px;
+  padding: 10px;
+}
+.header-container header nav ul li:hover ul {
+  display: block;
+  position: absolute;
+  z-index: 9999;
+  top: 36px;
+  left: 0;
+  height: auto;
+}
+.header-container header nav ul li:hover ul li {
+  width: 100%;
+}
+.header-container header nav ul li:hover ul li a {
+  display: block;
+  text-align: left;
+  border-bottom: 1px solid #FFF;
+}
+.header-container header nav ul li:hover ul:hover ul {
+  display: block;
+  position: absolute;
+  left: 124px;
+  top: 0;
+}
+.header-container header nav a:link, .header-container header nav a:visited {
+  text-decoration: none;
+  color: #FFF;
+  font-weight: bold;
+}
+
+.main .featured {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 25%;
   float: left;
   padding-left: 0.83333%;
   padding-right: 0.83333%;
+  text-align: center;
 }
-
-@media (min-width: 480px) {
-  .column1 {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 25%;
-    float: left;
-    padding-left: 0.83333%;
-    padding-right: 0.83333%;
-  }
+.main .featured h3 {
+  margin: 0;
+  border-top: 1px solid #333;
 }
-
-.column2 {
-  border: 1px solid #000;
+.main .featured h3 a {
+  margin: 10px 0;
+  display: block;
+  text-decoration: none;
+}
+.main .featured .image {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 120px;
   overflow: hidden;
-  *zoom: 1;
 }
-@media (min-width: 480px) {
-  .column2 {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 75%;
-    float: left;
-    padding-left: 0.83333%;
-    padding-right: 0.83333%;
-  }
+.main .featured .image img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100px;
+  width: 100px;
+  transition: width .5s , height .5s;
+  transform: translate(-50%, -50%);
 }
-@media (min-width: 768px) {
-  .column2 {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 33.33333%;
-    float: left;
-    padding-left: 0.83333%;
-    padding-right: 0.83333%;
-  }
+.main .featured:hover {
+  cursor: pointer;
+}
+.main .featured:hover .image img {
+  width: 110px;
+  height: 110px;
+  transition: width .5s , height .5s;
 }
 
-@media (min-width: 480px) {
-  .column3 {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 75%;
-    float: right;
-    padding-left: 0.83333%;
-    padding-right: 0.83333%;
-  }
+.aside {
+  background: #F6F6F6;
 }
-@media (min-width: 768px) {
-  .column3 {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 41.66667%;
-    float: left;
-    padding-left: 0.83333%;
-    padding-right: 0.83333%;
-  }
+.aside h2 {
+  text-align: center;
+  margin: 0;
+}
+.aside .featured {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 50%;
+  float: left;
+  padding-left: 0.83333%;
+  padding-right: 0.83333%;
+  position: relative;
+  overflow: hidden;
+}
+.aside .featured h3 {
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  z-index: 9999;
+  top: 80px;
+  left: 0;
+  opacity: .5s;
+  transition: opacity 1s;
+}
+.aside .featured h3 a {
+  padding: 10px 0;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  background: red;
+}
+.aside .featured .links {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0;
+  z-index: 9999;
+  padding: 20px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.5);
+  transition: opacity 1s;
+}
+.aside .featured:hover {
+  cursor: pointer;
+}
+.aside .featured:hover h3 {
+  opacity: 0;
+  transition: opacity 1s;
+}
+.aside .featured:hover .links {
+  opacity: 1;
+  transition: width 1s;
+  transition: opacity 1s;
+}
+.aside .featured:hover .background img {
+  width: 110%;
+  height: 110%;
+  transition: width 1s , height 1s;
+}
+.aside .featured .background {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+.aside .featured .background img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: 100%;
+  transition: width 1s , height 1s;
+  transform: translate(-50%, -50%);
+}
+
+.prefooter-container {
+  background: #333;
+}
+.prefooter-container .columm {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 20%;
+  float: left;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.footer-container {
+  background: #ccc;
+}
+.footer-container footer {
+  background: #ccc;
+  text-align: center;
 }
