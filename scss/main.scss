@@ -1,0 +1,69 @@
+@import "susy"; 
+@import "compass"; 
+@import "breakpoint"; 
+@import "normalize";
+
+$susy: (
+  columns: 12,
+  container: 80%,
+  gutters: .25,
+  math: fluid,
+  output: float,
+  gutter-position: inside,
+  box-sizing: border-box
+);
+
+@include border-box-sizing;
+
+
+$screen-xs:480px;
+$screen-sm:768px;
+$screen-md:992px;
+$screen-lg:1200px;
+
+.container {
+	@include container();
+	@include breakpoint($screen-md) {
+    	@include container($screen-md);
+  	}
+  	@include breakpoint($screen-lg) {
+    	@include container($screen-lg);
+  	}
+}
+
+section{
+	background: blue;
+}
+
+.column{
+	background: red;
+	@include span(12);
+}
+
+.column1{
+	@include breakpoint($screen-xs) {
+    	@include span(3 of 12);
+  	}
+}
+
+.column2{
+	border: 1px solid #000;
+
+	@include breakpoint($screen-xs) {
+    	@include span(9 of 12);
+  	}
+  	@include breakpoint($screen-sm) {
+    	@include span(4 of 12);
+  	}
+  	@include clearfix;
+}
+
+.column3{
+
+	@include breakpoint($screen-xs) {
+    	@include span(9 of 12 last);
+  	}
+  	@include breakpoint($screen-sm) {
+    	@include span(5 of 12);
+  	}  	
+}
